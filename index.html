@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Крыша 14 — клуб любителей астрономии</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Onest:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --night:#141a33; --dusk:#232c58; --moon:#ece6d6; --mist:#a9b0cf;
+  --mint:#8fd3c7; --ember:#f2a65a;
+  --display:"Unbounded","Arial Black",sans-serif;
+  --body:"Onest","Segoe UI",system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{background:var(--night);color:var(--moon);font:400 1.0625rem/1.65 var(--body)}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--mint);outline-offset:3px}
+.wrap{max-width:1040px;margin:0 auto;padding:0 24px}
+
+/* hero */
+.hero{position:relative;min-height:100svh;display:flex;flex-direction:column;overflow:hidden;
+  background:radial-gradient(ellipse at 70% 110%,var(--dusk),var(--night) 65%)}
+#sky{position:absolute;inset:0;width:100%;height:100%}
+nav{position:relative;z-index:2;display:flex;justify-content:space-between;align-items:center;padding:24px}
+nav b{font:700 1.1rem var(--display)}
+nav a{text-decoration:none;color:var(--mist);margin-left:24px;font-size:.95rem}
+nav a:hover{color:var(--moon)}
+.hero-body{position:relative;z-index:2;margin:auto 0;padding:0 24px 8vh;max-width:1040px;width:100%;margin-inline:auto}
+h1{font:700 clamp(2.6rem,9vw,6.4rem)/1 var(--display);letter-spacing:-.03em;max-width:11ch}
+.lead{max-width:46ch;margin:28px 0 36px;color:var(--mist);font-size:1.2rem}
+.btn{display:inline-block;background:var(--ember);color:#241608;font:500 1rem var(--body);
+  padding:14px 26px;border-radius:999px;text-decoration:none;border:0;cursor:pointer}
+.btn:hover{background:#ffb871}
+.hint{position:absolute;z-index:2;right:24px;bottom:20px;color:var(--mist);font-size:.85rem}
+
+/* sections */
+section{padding:96px 0}
+h2{font:700 clamp(1.6rem,4vw,2.4rem)/1.15 var(--display);letter-spacing:-.02em;margin-bottom:40px;max-width:20ch}
+.sessions{list-style:none;padding:0;border-top:1px solid #ffffff22}
+.sessions li{display:grid;grid-template-columns:110px 1fr auto;gap:20px;align-items:baseline;
+  padding:22px 0;border-bottom:1px solid #ffffff22}
+.date{font:500 1.5rem var(--display);color:var(--mint)}
+.date small{display:block;font:400 .85rem var(--body);color:var(--mist)}
+.sessions h3{font:500 1.15rem var(--body);color:var(--moon)}
+.sessions p{color:var(--mist);font-size:.98rem}
+.seats{color:var(--ember);font-size:.95rem;white-space:nowrap}
+
+.steps{background:var(--dusk)}
+ol.how{list-style:none;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:40px;counter-reset:s}
+ol.how li{counter-increment:s}
+ol.how li::before{content:counter(s);display:block;font:700 3.5rem/1 var(--display);color:var(--ember);margin-bottom:14px}
+ol.how h3{font:500 1.15rem var(--body);margin-bottom:6px}
+ol.how p{color:var(--mist);max-width:30ch}
+
+.join{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
+.join p{color:var(--mist);max-width:40ch}
+.card{display:grid;gap:16px}
+label{display:grid;gap:6px;font-size:.95rem;color:var(--mist)}
+input,select{font:inherit;color:var(--moon);background:#ffffff10;border:1px solid #ffffff33;
+  border-radius:10px;padding:12px 14px}
+select option{color:#111}
+.msg{min-height:1.6em;color:var(--mint)}
+footer{padding:36px 0 56px;color:var(--mist);font-size:.9rem;border-top:1px solid #ffffff22}
+
+@media(max-width:760px){
+  .sessions li{grid-template-columns:1fr;gap:4px}
+  ol.how,.join{grid-template-columns:1fr}
+  nav a{display:none}
+  .hint{display:none}
+}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <canvas id="sky" aria-hidden="true"></canvas>
+  <nav>
+    <b>Крыша 14</b>
+    <div><a href="#sessions">Расписание</a><a href="#how">Как это устроено</a><a href="#join">Записаться</a></div>
+  </nav>
+  <div class="hero-body">
+    <h1>Звёзды видно и из города</h1>
+    <p class="lead">Мы собираемся на крыше жилого дома раз в неделю, ставим телескопы и смотрим на Сатурн, туманности и Луну. Опыт не нужен — приносите тёплую куртку.</p>
+    <a class="btn" href="#join">Занять место на крыше</a>
+  </div>
+  <span class="hint">Проведите курсором по небу — звёзды соединятся</span>
+</header>
+
+<main>
+<section id="sessions">
+  <div class="wrap">
+    <h2>Ближайшие вечера</h2>
+    <ul class="sessions">
+      <li>
+        <div class="date">19 ноя<small>четверг, 19:30</small></div>
+        <div><h3>Сатурн и его кольца</h3><p>Смотрим в большой рефлектор, разбираем, почему кольца почти исчезают раз в 15 лет.</p></div>
+        <span class="seats">осталось 4 места</span>
+      </li>
+      <li>
+        <div class="date">26 ноя<small>четверг, 19:00</small></div>
+        <div><h3>Туманность Ориона</h3><p>Учимся находить созвездия без приложений и наводить телескоп вручную.</p></div>
+        <span class="seats">осталось 9 мест</span>
+      </li>
+      <li>
+        <div class="date">3 дек<small>четверг, 18:30</small></div>
+        <div><h3>Фотографируем Луну на телефон</h3><p>Берите смартфон — покажем, как сделать снимок с кратерами через окуляр.</p></div>
+        <span class="seats">осталось 12 мест</span>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<section id="how" class="steps">
+  <div class="wrap">
+    <h2>Как проходит вечер</h2>
+    <ol class="how">
+      <li><h3>Поднимаемся на крышу</h3><p>Встречаемся у подъезда, лифт доходит до 14 этажа, дальше — лестница.</p></li>
+      <li><h3>Привыкают глаза</h3><p>Пьём чай и слушаем короткий рассказ о том, что будет видно сегодня. Свет выключаем.</p></li>
+      <li><h3>Смотрим в телескопы</h3><p>У каждого телескопа свой гид. Можно задавать любые вопросы, даже самые простые.</p></li>
+    </ol>
+  </div>
+</section>
+
+<section id="join">
+  <div class="wrap join">
+    <div>
+      <h2>Записаться на вечер</h2>
+      <p>Участие бесплатное, мы просто просим предупредить заранее, чтобы хватило телескопов и чая. Если будет облачно, напишем за три часа и перенесём встречу.</p>
+    </div>
+    <div class="card">
+      <label>Ваше имя<input id="name" type="text" autocomplete="given-name"></label>
+      <label>Вечер
+        <select id="night">
+          <option>19 ноября — Сатурн</option>
+          <option>26 ноября — Туманность Ориона</option>
+          <option>3 декабря — Луна на телефон</option>
+        </select>
+      </label>
+      <button class="btn" id="go" type="button">Записаться</button>
+      <div class="msg" id="msg" role="status" aria-live="polite"></div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer><div class="wrap">Крыша 14 — любительский клуб астрономии. Встречи по четвергам, если позволяет погода.</div></footer>
+
+<script>
+// звёздное небо: звёзды дрейфуют, рядом с курсором соединяются линиями
+(function(){
+  var c=document.getElementById('sky'),x=c.getContext('2d'),W,H,stars=[],mouse={x:-999,y:-999};
+  var calm=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function size(){
+    var r=c.getBoundingClientRect(),d=window.devicePixelRatio||1;
+    W=r.width;H=r.height;c.width=W*d;c.height=H*d;x.setTransform(d,0,0,d,0,0);
+    stars=[];var n=Math.round(W*H/5500);
+    for(var i=0;i<n;i++)stars.push({x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.4+.3,
+      vx:(Math.random()-.5)*.08,vy:(Math.random()-.5)*.08,a:Math.random()*.6+.3});
+  }
+  function draw(){
+    x.clearRect(0,0,W,H);
+    var near=[];
+    for(var i=0;i<stars.length;i++){
+      var s=stars[i];
+      if(!calm){s.x+=s.vx;s.y+=s.vy;if(s.x<0)s.x=W;if(s.x>W)s.x=0;if(s.y<0)s.y=H;if(s.y>H)s.y=0;}
+      var dx=s.x-mouse.x,dy=s.y-mouse.y,d=Math.sqrt(dx*dx+dy*dy);
+      x.beginPath();x.arc(s.x,s.y,s.r,0,6.283);
+      x.fillStyle=d<150?'#8fd3c7':'rgba(236,230,214,'+s.a+')';x.fill();
+      if(d<150)near.push(s);
+    }
+    x.strokeStyle='rgba(143,211,199,.45)';x.lineWidth=.7;
+    for(var a=0;a<near.length;a++)for(var b=a+1;b<near.length;b++){
+      var ex=near[a].x-near[b].x,ey=near[a].y-near[b].y;
+      if(ex*ex+ey*ey<80*80){x.beginPath();x.moveTo(near[a].x,near[a].y);x.lineTo(near[b].x,near[b].y);x.stroke();}
+    }
+    if(!calm)requestAnimationFrame(draw);
+  }
+  function move(e){var r=c.getBoundingClientRect(),p=e.touches?e.touches[0]:e;mouse.x=p.clientX-r.left;mouse.y=p.clientY-r.top;if(calm)draw();}
+  window.addEventListener('mousemove',move);window.addEventListener('touchmove',move,{passive:true});
+  window.addEventListener('resize',function(){size();if(calm)draw();});
+  size();draw();
+})();
+
+// запись на вечер
+document.getElementById('go').addEventListener('click',function(){
+  var n=document.getElementById('name').value.trim(),v=document.getElementById('night').value,m=document.getElementById('msg');
+  m.style.color=n?'var(--mint)':'var(--ember)';
+  m.textContent=n?n+', вы записаны: '+v+'. Напишем за три часа до начала.':'Введите имя, чтобы мы знали, как к вам обращаться.';
+});
+</script>
+</body>
+</html>
